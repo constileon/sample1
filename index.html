@@ -3,28 +3,76 @@
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <style> p{font-family:"comic sans MS";font-size:40px}
+    circle {opacity: 0.4}
     body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
   </style>
 </head>
 
-<body>
+<body> 
+  <svg style="background: lightgrey"
+       width=900 height = 500 ></svg>
+  
+  
   <script>
     
     [24, 42, 1]
-    ["Gaspard", "Fanny"]
+    var data = ["Gaspard", "Fanny"]
     
+    var data = [ {nom: "Bonjour !",couleur: "purple", population: 130 000 000 }, {nom: "Merhaba !",
+                 couleur: "lightblue", population: 75 000 000}, {nom: "Namashkar !", couleur: "green", population : 490 000 000}, {nom:"Alhan !", couleur : "yellow", population: 378 000 000}, {nom: "Hello !", couleur: "red"}, {nom: "Moshimoshi !", couleur: "brown", population: 127 000 000}, {nom: "! Hola !", couleur: "blue", population: 323 000 000} ] 
+    
+   
   
+      //santé
+    var y = d3.scaleLinear()
+    .domain (0,90)
+    .range (500-50, 0+50)
+    
+    
+    //richesse
+    var x = d3.scaleLog()
+    .domain ([400, 40000])
+    .range([0,800])
+    
+    // population - rayon
+    var r = d3.scaleSqrt() 
+    .domain ([0, 1.5e9])
+    .range ([0, 40])
+    
+    //continent
+    var c= d3.scaleOrdinal ()
+    .domain ({"Bonjour", "Namahskar"})
+    .range({"green", "red"})
+    
     d3
     .select("body")
     .selectAll("p")
-    .data(["Gaspard", "Fanny"])
+    .data(data)
     .enter()
-    .append ("p") .text (d=> "YoYoYo " + d)
+    .append ("p") .text (d=> d.nom)
+    .style ("background-color", d=> d.couleur)
+    
+    d3
+    .select("svg")
+    .selectAll("circle")
+    .data(data)
+    .enter()
+    .append ("circle") .text (d=> d.nom)
+    .style ("fill", d=> d.couleur)
+    	.style ("stroke", "black")
+    .attr ("r", d=> r (d.population))
+    .attr("cx", d=>x(d.richesse))
+    .attr("cy", d=>y (d.sante))
+    
+  
+    
+    
+    
+    //for=(i=0; i>100; i++)
+    
 
     
     
-    
-
 
   </script>
 </body>
