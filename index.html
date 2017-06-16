@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <style>
+  <style> p{font-family:"comic sans MS";font-size:40px}
     body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
   </style>
 </head>
@@ -11,20 +11,20 @@
   <script>
     
     [24, 42, 1]
-    ["Gaspard est un gros poulet"]
+    ["Gaspard", "Fanny"]
+    
+  
+    d3
+    .select("body")
+    .selectAll("p")
+    .data(["Gaspard", "Fanny"])
+    .enter()
+    .append ("p") .text (d=> "YoYoYo " + d)
 
     
-    // Feel free to change or delete any of the code you see in this editor!
-    var svg = d3.select("body").append("svg")
-      .attr("width", 960)
-      .attr("height", 500)
+    
+    
 
-    svg.append("text")
-      .text("Le Tempo libère mon Imagination")
-      .attr("y", 200)
-      .attr("x", 120)
-      .style("font-size", 42)
-      .style("font-family", "monospace")
 
   </script>
 </body>
